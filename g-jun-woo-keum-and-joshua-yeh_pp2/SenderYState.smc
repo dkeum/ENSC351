@@ -1,0 +1,778 @@
+9999 4 1
+6
+BEGIN DATA
+BEGIN GenericState 191
+191 10
+244 88 254 96
+1
+NotState
+0 12582911 0
+10
+TEXTBEGIN
+dummystate
+TEXTEND
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN GenericState 104
+104 10
+1 1 286 129
+1
+Sender Toplevel
+0 12582911 0
+0
+TEXTBEGIN
+
+TEXTEND
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN GenericState 102
+102 10
+10 9 254 107
+1
+NON_CAN
+0 65535 0
+84
+TEXTBEGIN
+fileName = fileNames
+ctx.openFileToTransfer(fileName);
+ctx.transferringFileD == -1
+TEXTEND
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN InitialState 101
+101 10
+11 25 15 29
+1
+InitialState
+BEGIN GenericState 105
+105 10
+24 20 51 34
+1
+GenStatBlk
+0 12582911 0
+0
+TEXTBEGIN
+
+TEXTEND
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN GenericState 110
+110 10
+119 13 154 27
+1
+CondTransientNAKCheck
+0 12632256 0
+16
+TEXTBEGIN
+ POST("*",CONT);
+TEXTEND
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN Transition 112
+112 40
+67 29 67 37
+101 105
+2 1 4 2
+2 15 27 16 27 
+1 16 27 23 27 
+3 23 27 24 27 
+BEGIN FinalState 117
+117 10
+278 117 282 121
+1
+FinalState
+BEGIN Mesg 119
+119 20
+9 107 124 137
+1
+1 1 16777215 65280
+118
+CONT
+ctx.transferringFileD == -1
+257
+TEXTBEGIN
+if(fileNameIndex+1 >= fileNames.size()
+  PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+  ctx.cans();
+  PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+if(fileNameIndex+1 < fileNames.size()
+  PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+  ctx.cans();
+TEXTEND
+BEGIN GenericState 120
+120 10
+208 13 238 27
+1
+CondTransientResend
+0 12632256 0
+16
+TEXTBEGIN
+ POST("*",CONT);
+TEXTEND
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN Mesg 123
+123 20
+177 12 209 22
+1
+1 1 16777215 65280
+121
+CONT
+byteToReceive == NAK
+11
+TEXTBEGIN
+errCnt++;
+
+TEXTEND
+BEGIN GenericState 124
+124 10
+108 59 137 72
+1
+CondTransientRead
+0 12632256 0
+16
+TEXTBEGIN
+ POST("*",CONT);
+TEXTEND
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN Mesg 129
+129 20
+166 23 220 34
+1
+1 1 16777215 65280
+128
+CONT
+errCnt < errB
+65
+TEXTBEGIN
+ctx.resendBlk();
+PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); 
+TEXTEND
+BEGIN Mesg 130
+130 20
+115 28 152 34
+1
+1 1 16777215 65280
+127
+-Edit-
+byteToReceive != NAK
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN Mesg 131
+131 20
+155 37 196 44
+1
+1 1 16777215 65280
+126
+CONT
+byteToReceive != NAK & errCnt < errB
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN GenericState 132
+132 10
+166 60 191 74
+1
+SendData
+0 12582911 0
+0
+TEXTBEGIN
+
+TEXTEND
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN GenericState 133
+133 10
+220 57 250 70
+1
+CondTransientACKCheck
+0 12632256 0
+16
+TEXTBEGIN
+ POST("*",CONT);
+TEXTEND
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN GenericState 134
+134 10
+219 86 246 101
+1
+CondTransientResend
+0 12632256 0
+16
+TEXTBEGIN
+ POST("*",CONT);
+TEXTEND
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN GenericState 140
+140 10
+78 89 105 103
+1
+CondTransientClose
+0 12632256 0
+16
+TEXTBEGIN
+ POST("*",CONT);
+TEXTEND
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN Transition 135
+135 40
+110 61 110 69
+124 132
+2 2 4 2
+2 137 65 138 65 
+0 138 65 138 67 
+1 138 67 165 67 
+3 165 67 166 67 
+BEGIN Mesg 142
+142 20
+139 61 159 67
+1
+1 1 16777215 65280
+135
+CONT
+bytesRd = 1
+2
+TEXTBEGIN
+
+
+TEXTEND
+BEGIN Mesg 143
+143 20
+108 96 133 106
+1
+1 1 16777215 65280
+141
+CONT
+bytesRd != 1
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN Mesg 146
+146 20
+182 83 227 89
+1
+1 1 16777215 65280
+136
+SER
+byteToReceive == NAK
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN Mesg 148
+148 20
+125 74 163 84
+1
+1 1 16777215 65280
+137
+CONT
+errCnt < errB
+12
+TEXTBEGIN
+resendBlk();
+TEXTEND
+BEGIN Mesg 155
+155 20
+53 11 113 31
+1
+1 1 16777215 65280
+154
+CONT
+ctx.transferringFileD != -1
+201
+TEXTBEGIN
+ctx.genStatBlk(blkBuf, fileName)
+PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); 
+ctx.sendBlkPrepNext();
+PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+TEXTEND
+BEGIN GenericState 156
+156 10
+79 54 103 67
+1
+EOT
+0 12582911 0
+0
+TEXTBEGIN
+
+TEXTEND
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN Mesg 158
+158 20
+64 66 95 88
+1
+1 1 16777215 65280
+157
+SER
+byteToReceive == NAK
+93
+TEXTBEGIN
+if (transferringFileD != -1){
+ctx.closeTransferredFile();
+ ctx.result="SndCancelled";
+ }
+
+TEXTEND
+BEGIN GenericState 159
+159 10
+14 59 52 73
+1
+CondTransientNextFile
+0 12632256 0
+16
+TEXTBEGIN
+ POST("*",CONT);
+TEXTEND
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN Mesg 163
+163 20
+57 28 112 54
+1
+1 1 16777215 65280
+160
+SER
+byteToReceive == NAK
+334
+TEXTBEGIN
+ctx.sendByte(EOT);
+PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+if (byteToReceive != NAK)
+  ctx.result = "The first NAK for 1st EOT not received";
+ctx.sendByte(EOT);
+PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); 
+if (byteToReceive != ACK)
+  ctx.result = "The first ACK for 2nd EOT not received";
+ctx.closeTransferredFile();
+TEXTEND
+BEGIN Transition 121
+121 40
+66 56 66 64
+110 120
+2 2 4 2
+2 154 20 155 20 
+1 155 20 207 20 
+3 207 20 208 20 
+BEGIN Transition 128
+128 40
+137 22 137 30
+120 110
+4 1 2 3
+2 208 23 207 23 
+1 207 23 155 23 
+3 155 23 154 23 
+BEGIN Transition 127
+127 40
+79 28 79 36
+110 124
+3 1 1 1
+2 144 27 144 28 
+1 144 28 115 28 
+0 115 28 115 58 
+3 115 58 115 59 
+BEGIN Transition 136
+136 40
+142 70 142 78
+132 134
+3 2 1 2
+2 178 74 178 75 
+0 178 75 178 83 
+1 178 83 232 83 
+0 232 83 232 85 
+3 232 85 232 86 
+BEGIN Transition 150
+150 40
+191 49 191 57
+133 124
+1 2 1 3
+2 235 57 235 56 
+0 235 56 235 46 
+1 235 46 129 46 
+0 129 46 129 58 
+3 129 58 129 59 
+BEGIN Transition 170
+170 40
+230 97 230 105
+134 117
+3 2 4 1
+2 232 101 232 102 
+0 232 102 232 119 
+1 232 119 277 119 
+3 277 119 278 119 
+BEGIN Transition 172
+172 40
+193 62 193 70
+132 133
+2 3 4 1
+2 191 70 192 70 
+0 192 70 192 66 
+1 192 66 219 66 
+3 219 66 220 66 
+BEGIN Transition 141
+141 40
+84 61 84 69
+124 140
+4 2 2 2
+2 108 65 107 65 
+0 107 65 107 96 
+1 107 96 106 96 
+3 106 96 105 96 
+BEGIN Transition 126
+126 40
+131 29 131 37
+120 124
+3 2 1 2
+2 223 27 223 28 
+0 223 28 223 37 
+1 223 37 122 37 
+0 122 37 122 58 
+3 122 58 122 59 
+BEGIN Transition 179
+179 40
+257 53 257 61
+102 178
+2 2 1 2
+2 254 58 255 58 
+1 255 58 270 58 
+0 270 58 270 59 
+3 270 59 270 60 
+BEGIN Transition 160
+160 40
+58 56 58 64
+156 159
+1 2 2 2
+2 91 54 91 53 
+0 91 53 91 52 
+1 91 52 53 52 
+0 53 52 53 66 
+3 53 66 52 66 
+BEGIN Transition 183
+183 40
+230 23 230 31
+120 117
+3 1 1 1
+2 230 27 230 28 
+0 230 28 230 42 
+1 230 42 280 42 
+0 280 42 280 116 
+3 280 116 280 117 
+BEGIN Transition 157
+157 40
+60 74 60 82
+140 156
+1 2 3 2
+2 91 89 91 88 
+0 91 88 91 68 
+3 91 68 91 67 
+BEGIN Transition 154
+154 40
+47 27 47 35
+105 110
+2 2 4 2
+2 51 27 52 27 
+1 52 27 106 27 
+0 106 27 106 20 
+1 106 20 118 20 
+3 118 20 119 20 
+BEGIN Transition 189
+189 40
+39 55 39 63
+159 105
+1 3 3 1
+2 42 59 42 58 
+0 42 58 42 51 
+1 42 51 48 51 
+0 48 51 48 40 
+1 48 40 43 40 
+0 43 40 43 35 
+3 43 35 43 34 
+BEGIN Transition 192
+192 40
+261 93 261 101
+174 191
+1 1 2 2
+2 261 97 261 96 
+0 261 96 261 92 
+1 261 92 255 92 
+3 255 92 254 92 
+BEGIN Transition 187
+187 40
+25 56 25 64
+159 117
+3 3 4 1
+2 24 73 24 74 
+0 24 74 24 103 
+1 24 103 75 103 
+0 75 103 75 119 
+1 75 119 277 119 
+3 277 119 278 119 
+BEGIN Transition 137
+137 40
+129 87 129 95
+134 124
+4 2 3 2
+2 219 93 218 93 
+1 218 93 131 93 
+0 131 93 131 83 
+1 131 83 122 83 
+0 122 83 122 73 
+3 122 73 122 72 
+BEGIN Transition 180
+180 40
+267 80 267 88
+178 117
+3 2 1 1
+2 270 73 270 74 
+0 270 74 270 95 
+1 270 95 280 95 
+0 280 95 280 116 
+3 280 116 280 117 
+BEGIN Transition 118
+118 40
+37 34 37 42
+105 117
+4 1 4 1
+2 24 30 23 30 
+1 23 30 6 30 
+0 6 30 6 126 
+1 6 126 232 126 
+0 232 126 232 119 
+1 232 119 277 119 
+3 277 119 278 119 
+BEGIN Mesg 169
+169 20
+171 47 221 61
+1
+1 1 16777215 65280
+150
+SER
+byteToReceive == ACK
+58
+TEXTBEGIN
+if(byteToReceive == ACK)
+  errCnt = 0;
+else
+  //nothing
+TEXTEND
+BEGIN Mesg 171
+171 20
+233 106 275 118
+1
+1 1 16777215 65280
+170
+CONT
+errCnt > errB
+51
+TEXTBEGIN
+ctx.result = "More than 10 errors in line bytesRd";
+TEXTEND
+BEGIN Mesg 173
+173 20
+192 68 241 82
+1
+1 1 16777215 65280
+172
+SER
+byteToReceive == ACK || byteToReceive == 'C'
+119
+TEXTBEGIN
+[byteToReceive == ACK || byteToReceive == 'C' ]
+ctx.sendBlkPrepNext();
+PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+TEXTEND
+BEGIN InitialState 174
+174 10
+259 97 263 101
+1
+InitialState
+BEGIN Note 176
+176 50
+156 96 215 117
+1
+0 0 12632256 128
+316
+TEXTBEGIN
+The entry code:
+POST("*",CONT);
+
+in the grey transient states immediately posts a continue (CONT) event that 
+immediately kicks the StateChart out of those states.
+Event SER is the event of a character being available from the Medium (simulating a SERial port)
+(Taken from Receiver Toplevel smartState diagram)
+TEXTEND
+BEGIN Note 177
+177 50
+244 2 284 26
+1
+0 0 8454143 128
+186
+TEXTBEGIN
+Simplified Sender Statechart
+No dropped characters,  no timeouts, no cancellation via keyboard
+
+ENSC 351: MultiPartProject2
+Members: 
+Daniel Keum, 301335490
+Joshua Yeh, 301381664
+
+TEXTEND
+BEGIN GenericState 178
+178 10
+262 60 278 73
+1
+CAN
+0 65535 0
+0
+TEXTBEGIN
+
+TEXTEND
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN Mesg 181
+181 20
+257 46 275 52
+1
+1 1 16777215 65280
+179
+SER
+c==CAN
+0
+TEXTBEGIN
+
+TEXTEND
+BEGIN Mesg 182
+182 20
+244 76 271 91
+1
+1 1 16777215 65280
+180
+SER
+c == CAN
+83
+TEXTBEGIN
+if (transferringD != -1)
+ ctx.closeTransferredFile();
+ctx.result="SndCancelled";
+TEXTEND
+BEGIN Mesg 184
+184 20
+233 29 285 41
+1
+1 1 16777215 65280
+183
+CONT
+errCnt > errB
+54
+TEXTBEGIN
+ctx.result = "didnt get ACK in genstatBlk";
+return;
+
+TEXTEND
+BEGIN Mesg 188
+188 20
+25 81 127 117
+1
+1 1 16777215 65280
+187
+CONT
+fileNameIndex >= fileName.size()
+279
+TEXTBEGIN
+if(ctx.transferringFileD == -1)
+        //nothing
+else
+  PE_NOT(myRead(mediumD, &byteToReceive, 1), 1);
+ctx.sendLastByte(ctx.sendMostBlk(blkBuf))
+PE_NOT(myRead(mediumD, &byteToReceive, 1), 1); 
+if (byteToReceive != ACK)
+  ctx.result = "Cannot end the batch with no ACK";
+
+TEXTEND
+BEGIN Mesg 190
+190 20
+13 41 57 58
+1
+1 1 16777215 65280
+189
+CONT
+fileNameIndex < fileName.size()
+16
+TEXTBEGIN
+fileNameIndex++;
+TEXTEND
+END DATA
+Untitled
+Context
+Context.h
+
+0
+INCLUDE BEGIN
+
+INCLUDE END
+0
+DECL BEGIN
+
+DECL END
+Untitled
+0
+DESC BEGIN
+
+DESC END
+0
+INCLUDE BEGIN
+
+INCLUDE END
+0
+DECL BEGIN
+
+DECL END
+Context
+
+0
+DECL BEGIN
+
+DECL END
+Context
+
+0
+DECL BEGIN
+
+DECL END
